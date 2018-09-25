@@ -1,4 +1,4 @@
-package cdc.util;
+package base;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -14,7 +14,7 @@ public class ConnectionDAO {
         public static Connection getConnection() throws Exception{
             try{
                 Class.forName("com.mysql.jdbc.Driver");
-                return DriverManager.getConnection("jdbc:mysql://localhost:3306/criptoRace","admin","admin");
+                return DriverManager.getConnection("jdbc:mysql://localhost:3306/cardappioDB","admin","admin");
             }catch(ClassNotFoundException | SQLException e){
                 throw new Exception(e.getMessage());
             }

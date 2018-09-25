@@ -1,3 +1,6 @@
+<%@page import="model.Categoria"%>
+<%@page import="java.util.List"%>
+<%@page import="ado.CategoriaADO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,18 +28,18 @@
                 <li class="nav-item active">
                   <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="entradas">Entradas</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="pratosPrincipais">Pratos Principais</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="sobremesas">Sobremesas</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="bebidas">Bebidas</a>
-                </li>
+                <%
+                    List<Categoria> listaCategoria = (List<Categoria>) request.getAttribute("listaCategoria");
+                    
+                    for(Categoria c:listaCategoria){
+                        %>
+                            <li class="nav-item">
+                                <a class="nav-link" href="entradas"><%= c.getCategoriaNm() %></a>
+                            </li>
+                        <%
+                    }
+                %>
+                
               </ul>
               <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -44,8 +47,36 @@
               </form>
             </div>
           </nav>
-        <!-- //fecha o menu principal -->
+        <!-- //fecha o menu principal -->        
         
+        <section class="container fotos-destaque">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img class="d-block w-100" src="img/f1.jpeg" alt="First slide">
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="img/f2.jpg" alt="Second slide">
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block w-100" src="img/f3.jpeg" alt="Third slide">
+                  </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+        </section>
         <!-- abre o corpo do site -section1 -->
         <section class="container corpo">
             <div class="jumbotron">
@@ -54,32 +85,6 @@
         </section>
         <!-- //fecha o corpo do site -section1 -->
         
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img class="d-block w-100" src=".../800x400?auto=yes&bg=777&fg=555&text=First slide" alt="First slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src=".../800x400?auto=yes&bg=666&fg=444&text=Second slide" alt="Second slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src=".../800x400?auto=yes&bg=555&fg=333&text=Third slide" alt="Third slide">
-              </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
         
     </body>
     <script src="js/jquery.js"></script>
