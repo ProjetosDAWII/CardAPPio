@@ -1,6 +1,7 @@
 package controller;
 
 import ado.CategoriaADO;
+import ado.ProdutoADO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Categoria;
+import model.Produto;
 
 /**
  *
@@ -31,10 +33,18 @@ public class PrincipalServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CategoriaADO catA = new CategoriaADO();
+        ProdutoADO prodA = new ProdutoADO();
         try {
-            List<Categoria> lista = catA.listaTodos();
             RequestDispatcher despachante = request.getRequestDispatcher("index.jsp");
+            
+            //carregando as categorias
+            List<Categoria> lista = catA.listaTodos();            
             request.setAttribute("listaCategoria", lista);
+            
+            //carregando os produtos
+            List<Produto> listaProduto = prodA.listaTodos();
+            request.setAttribute("listaProduto", listaProduto);
+            
             despachante.forward(request, response);
             
         } catch (Exception ex) {

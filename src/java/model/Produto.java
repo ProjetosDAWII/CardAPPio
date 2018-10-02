@@ -33,6 +33,12 @@ public class Produto implements Serializable {
         this.idProduto = idProduto;
         this.produtoNm = produtoNm;
     }
+    
+    public Produto(Integer idProduto, String produtoNm, String produtoDesc){
+        this.idProduto = idProduto;
+        this.produtoNm = produtoNm;
+        this.produtoDesc = produtoDesc;
+    }
 
     public Integer getIdProduto() {
         return idProduto;

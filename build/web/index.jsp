@@ -1,3 +1,4 @@
+<%@page import="model.Produto"%>
 <%@page import="model.Categoria"%>
 <%@page import="java.util.List"%>
 <%@page import="ado.CategoriaADO"%>
@@ -81,10 +82,41 @@
         <section class="container corpo">
             <div class="jumbotron">
                 <h4>Bem-vindo ao <span>CardAPPio</span></h4>
+                <%
+                    List<Produto> listaProduto = (List<Produto>) request.getAttribute("listaProduto");
+                    
+                    for(Produto p:listaProduto){
+                        %>
+                        <li>
+                                <a href="entradas">
+                                    <div>
+                                        <h6><%= p.getProdutoNm() %></h6>
+                                        <span><%= p.getProdutoDesc() %></span>
+                                    </div>
+                                </a>
+                        </li>            
+                        <%
+                    }
+                %>
+                
+                <div class="empurra"></div>
+                <div class="row">
+                    <div style="background-color: red" class="col-sm-6 col-md-3">Coluna 1</div>
+                    <div style="background-color: yellow" class="col-sm-6 col-md-5">Coluna 2</div>
+                    <div style="background-color: blue" class="col-sm-6 col-md-2">Coluna 3</div>
+                    <div style="background-color: purple" class="col-sm-6 col-md-2">Coluna 4</div>
+                </div>
             </div>    
         </section>
         <!-- //fecha o corpo do site -section1 -->
         
+        <!-- rodapé -->
+        <footer class="container">
+            <li><a href="/CardAPPio">CardAPPio</a></li>
+            <li>2018 - Todos os direitos reservados</li>
+            <li>Feito por Índio Véio</li>
+        </footer>
+        <!-- //rodapé -->
         
     </body>
     <script src="js/jquery.js"></script>
