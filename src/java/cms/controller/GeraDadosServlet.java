@@ -5,24 +5,18 @@
  */
 package cms.controller;
 
-import cms.ado.LoginADO;
-import cms.model.Login;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author tatuapu
  */
-public class LoginServlet extends HttpServlet {
+public class GeraDadosServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,28 +29,11 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        
-        Login login = new Login(email, password);
-        LoginADO loginADO = new LoginADO();
-        try {
-            List<Login> listaLogin = loginADO.procura(login);
-            if(listaLogin.size()>0){
-                //capturando a sessão ativa
-                HttpSession sessao = request.getSession();
-                sessao.setAttribute("idUsuario", listaLogin.get(0).getKey());
-                sessao.setAttribute("nmUsuario", listaLogin.get(0).getNmUsuario());
-                
-                //redirecionando o usuário para a página principal
-                response.sendRedirect("home.jsp");
-                
-            }else{
-                request.setAttribute("msg", "Credenciais inválidas");
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("Produto 01");
+            out.println("Produto 02");
         }
     }
 

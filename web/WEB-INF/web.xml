@@ -8,6 +8,10 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>cms.controller.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GeraDadosServlet</servlet-name>
+        <servlet-class>cms.controller.GeraDadosServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PrincipalServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/cms/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GeraDadosServlet</servlet-name>
+        <url-pattern>/cms/dados</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

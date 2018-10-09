@@ -25,6 +25,7 @@ h1, h2, h3, h4{
 }
 .corpo{
     margin-top: 5px;    
+    background-color: white;
 }
 .corpo h4{
     font-family: renaissance;
