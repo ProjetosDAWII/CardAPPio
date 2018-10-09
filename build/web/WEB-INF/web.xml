@@ -4,9 +4,17 @@
         <servlet-name>PrincipalServlet</servlet-name>
         <servlet-class>controller.PrincipalServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>cms.controller.LoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PrincipalServlet</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/cms/login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -14,6 +22,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
+        <welcome-file>cms/index.jsp</welcome-file>
         <welcome-file>home</welcome-file>
     </welcome-file-list>
 </web-app>

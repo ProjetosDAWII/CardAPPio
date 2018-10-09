@@ -100,12 +100,12 @@
                 %>
                 
                 <div class="empurra"></div>
-                <div class="row">
-                    <div style="background-color: red" class="col-sm-6 col-md-3">Coluna 1</div>
-                    <div style="background-color: yellow" class="col-sm-6 col-md-5">Coluna 2</div>
-                    <div style="background-color: blue" class="col-sm-6 col-md-2">Coluna 3</div>
-                    <div style="background-color: purple" class="col-sm-6 col-md-2">Coluna 4</div>
-                </div>
+                <!--<div class="row">
+                    <div style="background-color: red" class="col-sm-6 col-md-3 col-xl-2">Coluna 1</div>
+                    <div style="background-color: yellow" class="col-sm-6 col-md-5  col-xl-2">Coluna 2</div>
+                    <div style="background-color: blue" class="col-sm-6 col-md-2  col-xl-2">Coluna 3</div>
+                    <div style="background-color: purple" class="col-sm-6 col-md-2  col-xl-2">Coluna 4</div>
+                </div> -->
             </div>    
         </section>
         <!-- //fecha o corpo do site -section1 -->
