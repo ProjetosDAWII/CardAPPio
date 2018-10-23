@@ -5,10 +5,13 @@
         <group>
             <file>file:/home/tatuapu/NetBeansProjects/CardAPPio/web/index.jsp</file>
             <file>file:/home/tatuapu/NetBeansProjects/CardAPPio/src/java/cms/ado/LoginADO.java</file>
+            <file>file:/home/tatuapu/NetBeansProjects/CardAPPio/web/WEB-INF/web.xml</file>
             <file>file:/home/tatuapu/NetBeansProjects/CardAPPio/web/cms/index.jsp</file>
             <file>file:/home/tatuapu/NetBeansProjects/CardAPPio/web/cms/css/principal.css</file>
             <file>file:/home/tatuapu/NetBeansProjects/CardAPPio/src/java/cms/model/Login.java</file>
             <file>file:/home/tatuapu/NetBeansProjects/CardAPPio/src/java/cms/controller/LoginServlet.java</file>
+            <file>file:/home/tatuapu/NetBeansProjects/CardAPPio/web/cms/home.jsp</file>
+            <file>file:/home/tatuapu/NetBeansProjects/CardAPPio/src/java/cms/controller/GeraDadosServlet.java</file>
         </group>
     </open-files>
 </project-private>
