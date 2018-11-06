@@ -67,34 +67,15 @@
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Nome</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
+                <tbody id="corpoTabela">
+                                 
                 </tbody>
               </table>
 
-             
+            <div id="div1"></div>
         </section>
         
         <!-- fecha  sessão principal do corpo do sistema -->
@@ -111,7 +92,27 @@
            $.ajax({
                url:"dados"
            }).done(function(data){
-               alert(data);
+               dados = JSON.parse(data);
+               //alert(dados.data.length);
+               count=1;
+               $.each(dados.data,function(indice,valor){
+                   //alert(valor.idProduto + "--" + valor.produtoNm);
+                   var div = document.getElementById('corpoTabela');
+                   var prev = div.innerHTML;
+                   var idNome = 'colNm'+ count;
+                   div.innerHTML =prev + "<tr><td>"+ valor.idProduto +"</td><td id='"+idNome+"' ondblclick=\"mudaNome('"+idNome+"')\">" + valor.produtoNm +"</td></tr>";
+                   count++;
+               });
+           });
+       }
+       function mudaNome(id){
+           var div = document.getElementById(id);
+           div.innerHTML = "<input type='text' onBlur='saiu(\"this\")' value='"+div.innerHTML+"'>";
+       }
+       function saiu(id){
+           alert(id.value);
+           $.ajax({
+               url : "dados?id"
            });
        }
     </script>

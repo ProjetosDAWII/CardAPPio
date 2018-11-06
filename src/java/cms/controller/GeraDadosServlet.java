@@ -52,6 +52,7 @@ public class GeraDadosServlet extends HttpServlet {
                 for(Produto p:listaProduto){
                     dados = new JSONObject();
                     dados.put("idProduto",p.getIdProduto());
+                    dados.put("produtoNm", p.getProdutoNm());
                     filhos.add(dados);
                 }
                 pai.put("data", filhos);
