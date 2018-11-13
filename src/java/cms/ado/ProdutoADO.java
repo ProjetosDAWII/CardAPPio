@@ -58,6 +58,24 @@ public class ProdutoADO implements DAO {
         }
     }
 
+    public Integer excluir(Produto p) throws Exception{
+        PreparedStatement ps = null;
+        Connection conn = null;
+        try {
+            conn = ConnectionDAO.getConnection();
+            String sql = "DELETE produto WHERE idProduto=?";
+            
+            ps.setInt(1, p.getIdProduto());
+            
+            return ps.executeUpdate();
+
+        } catch (SQLException sqle) {
+            throw new Exception(sqle);
+        } finally {
+            ConnectionDAO.closeConnection(conn, ps);
+        }
+    }
+    
     @Override
     public void excluir(Object ob) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -45,6 +45,16 @@ public class GeraDadosServlet extends HttpServlet {
             String acao = request.getParameter("acao");
             
             if(acao!=null){
+                if(acao.equalsIgnoreCase("excluir")){
+                    Integer idProduto = Integer.parseInt(request.getParameter("idProduto"));
+                    Produto p =new Produto(idProduto);
+                    try {
+                        int resp = prodA.excluir(p);
+                        out.print(resp);
+                    } catch (Exception ex) {
+                        Logger.getLogger(GeraDadosServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 if(acao.equalsIgnoreCase("salvaUp")){
                     Integer idProduto = Integer.parseInt(request.getParameter("idProduto"));
                     String coluna = request.getParameter("col");
@@ -55,15 +65,14 @@ public class GeraDadosServlet extends HttpServlet {
                         coluna = "produtoNm";
                         p.setProdutoNm(valor);
                     }else if(coluna.contains("colDesc")){
-                        coluna = "produtoDesc";
-                        
-                        p.setProdutoDesc(coluna);
+                        coluna = "produtoDesc";                        
+                        p.setProdutoDesc(valor);
                     }                      
                     
                     try {
                         int resp = prodA.atualiza(p);
                         
-                            out.println(resp);
+                            out.print(resp);
                     } catch (Exception ex) {
                         Logger.getLogger(GeraDadosServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }

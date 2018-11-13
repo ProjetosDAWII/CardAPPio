@@ -41,7 +41,7 @@ public class Produto implements Serializable {
     }
 
     public Integer getIdProduto() {
-        return idProduto;
+        return this.idProduto;
     }
 
     public void setIdProduto(Integer idProduto) {

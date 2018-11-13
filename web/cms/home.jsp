@@ -110,7 +110,7 @@
                                             <td>"+ valor.idProduto +"</td>\n\
                                             <td id='"+idNome+"' ondblclick=\"editaColuna('"+valor.idProduto+"','"+idNome+"')\">" + valor.produtoNm +"</td>\n\
 \n\                                         <td id='"+idDesc+"' ondblclick=\"editaColuna('"+valor.idProduto+"','"+idDesc+"')\">" + valor.produtoDesc +"</td>\n\
-\n\                                         <td>x</td>\n\
+\n\                                         <td onClick='excluir("+valor.idProduto+")'>x</td>\n\
 \n\                                     </tr>";
                    count++;
                });
@@ -130,9 +130,26 @@
                url : "dados",
                data : {"idProduto":idProduto,"valor":input.value,"col":idColunaEmEdicao,"acao":"salvaUp"}
            }).done(function(data){
-               alert(data);
-               if(data>0)
+               if(data>0){
                    document.getElementById(idColunaEmEdicao).innerHTML = input.value;
+                   this.idProduto = 0;
+                   this.idColunaEmEdicao = null;
+                }else{
+                    alert("Erro ao altera os dados!");
+                }    
+           });
+       }
+       function excluir(id){
+           alert(id);
+           $.ajax({
+               url : "dados",
+               data : {"idProduto":id,"acao":"excluir"}
+           }).done(function(data){
+               if(data>0){
+                   alert("Excluido com sucesso");
+                }else{
+                    alert("Erro ao altera os dados!");
+                }    
            });
        }
     </script>
