@@ -21,7 +21,41 @@ public class ProdutoADO implements DAO {
 
     @Override
     public void atualizar(Object ob) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+    }
+    
+    public Integer atualiza(Produto p) throws Exception{
+        PreparedStatement ps = null;
+        Connection conn = null;
+        try {
+            conn = ConnectionDAO.getConnection();
+            String sql = "UPDATE produto SET ";
+            if(p.getProdutoNm()!=null){
+                sql+= "produtoNm=?";
+            }else if(p.getProdutoDesc()!=null){
+                if(sql.contains("produtoNm")) sql+= ", ";
+                sql += "produtoDesc=?";
+            }
+            sql += " WHERE idProduto=?";
+            ps = conn.prepareStatement(sql);
+            
+            int cont=1;
+            if(p.getProdutoNm()!=null){
+                ps.setString(cont, p.getProdutoNm());
+                cont++;
+            }else if(p.getProdutoDesc()!=null){
+                ps.setString(cont, p.getProdutoDesc());
+                cont++;
+            }
+            ps.setInt(cont, p.getIdProduto());
+            
+            return ps.executeUpdate();
+
+        } catch (SQLException sqle) {
+            throw new Exception(sqle);
+        } finally {
+            ConnectionDAO.closeConnection(conn, ps);
+        }
     }
 
     @Override

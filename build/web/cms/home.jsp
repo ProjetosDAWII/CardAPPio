@@ -131,6 +131,8 @@
                data : {"idProduto":idProduto,"valor":input.value,"col":idColunaEmEdicao,"acao":"salvaUp"}
            }).done(function(data){
                alert(data);
+               if(data>0)
+                   document.getElementById(idColunaEmEdicao).innerHTML = input.value;
            });
        }
     </script>

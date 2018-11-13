@@ -61,7 +61,9 @@ public class GeraDadosServlet extends HttpServlet {
                     }                      
                     
                     try {
-                        prodA.atualizar(p);
+                        int resp = prodA.atualiza(p);
+                        
+                            out.println(resp);
                     } catch (Exception ex) {
                         Logger.getLogger(GeraDadosServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }
