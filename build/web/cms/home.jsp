@@ -84,6 +84,9 @@
     <script src="js/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script>
+        var idProduto = 0;
+        var idColunaEmEdicao = null;
+        
        $(document).ready(function() {
            carregaDados();
        });
@@ -100,19 +103,26 @@
                    var div = document.getElementById('corpoTabela');
                    var prev = div.innerHTML;
                    var idNome = 'colNm'+ count;
-                   div.innerHTML =prev + "<tr><td>"+ valor.idProduto +"</td><td id='"+idNome+"' ondblclick=\"mudaNome('"+idNome+"')\">" + valor.produtoNm +"</td></tr>";
+                   var idDesc = 'colDesc'+count;
+                   div.innerHTML =prev + "<tr><td>"+ valor.idProduto +"</td><td id='"+idNome+"' ondblclick=\"editaColuna('"+valor.idProduto+"','"+idNome+"')\">" + valor.produtoNm +"</td></tr>";
                    count++;
                });
            });
        }
-       function mudaNome(id){
-           var div = document.getElementById(id);
-           div.innerHTML = "<input type='text' onBlur='saiu(\"this\")' value='"+div.innerHTML+"'>";
+       function editaColuna(idP, idCol){]
+           idProduto = idP;
+           idColunaEmEdicao = idCol;
+           
+           var div = document.getElementById(idCol);
+           div.innerHTML = "<input type='text' onBlur='salvaAlteracao(this)' value='"+div.innerHTML+"'>";
        }
-       function saiu(id){
-           alert(id.value);
+       function salvaAlteracao(input){
+           //alert(input.value + "-" + id);
            $.ajax({
-               url : "dados?id"
+               url : "dados",
+               data : {"idProduto":id}
+           }).done(function(data){
+               alert(data);
            });
        }
     </script>
