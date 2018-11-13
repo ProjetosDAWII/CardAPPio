@@ -68,6 +68,8 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Del</th>
                   </tr>
                 </thead>
                 <tbody id="corpoTabela">
@@ -104,23 +106,29 @@
                    var prev = div.innerHTML;
                    var idNome = 'colNm'+ count;
                    var idDesc = 'colDesc'+count;
-                   div.innerHTML =prev + "<tr><td>"+ valor.idProduto +"</td><td id='"+idNome+"' ondblclick=\"editaColuna('"+valor.idProduto+"','"+idNome+"')\">" + valor.produtoNm +"</td></tr>";
+                   div.innerHTML =prev + "<tr>\n\
+                                            <td>"+ valor.idProduto +"</td>\n\
+                                            <td id='"+idNome+"' ondblclick=\"editaColuna('"+valor.idProduto+"','"+idNome+"')\">" + valor.produtoNm +"</td>\n\
+\n\                                         <td id='"+idDesc+"' ondblclick=\"editaColuna('"+valor.idProduto+"','"+idDesc+"')\">" + valor.produtoDesc +"</td>\n\
+\n\                                         <td>x</td>\n\
+\n\                                     </tr>";
                    count++;
                });
            });
        }
-       function editaColuna(idP, idCol){]
+       function editaColuna(idP, idCol){
            idProduto = idP;
            idColunaEmEdicao = idCol;
            
            var div = document.getElementById(idCol);
            div.innerHTML = "<input type='text' onBlur='salvaAlteracao(this)' value='"+div.innerHTML+"'>";
+           div.getElementsByTagName("input")[0].focus();
        }
        function salvaAlteracao(input){
            //alert(input.value + "-" + id);
            $.ajax({
                url : "dados",
-               data : {"idProduto":id}
+               data : {"idProduto":idProduto,"valor":input.value,"col":idColunaEmEdicao,"acao":"salvaUp"}
            }).done(function(data){
                alert(data);
            });

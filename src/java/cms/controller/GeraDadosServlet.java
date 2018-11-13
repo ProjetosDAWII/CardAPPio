@@ -42,26 +42,54 @@ public class GeraDadosServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             
             prodA = new ProdutoADO();
-            //carregando os produtos
-            List<Produto> listaProduto;
-            try {
-                listaProduto = prodA.listaTodos();
-                JSONObject pai = new JSONObject();
-                JsonArray filhos = new JsonArray();
-                JSONObject dados;
-                for(Produto p:listaProduto){
-                    dados = new JSONObject();
-                    dados.put("idProduto",p.getIdProduto());
-                    dados.put("produtoNm", p.getProdutoNm());
-                    filhos.add(dados);
-                }
-                pai.put("data", filhos);
-                out.print(pai);
-                
-            } catch (Exception ex) {
-                out.print("ERRO no Servlet");
-            }
+            String acao = request.getParameter("acao");
             
+            if(acao!=null){
+                if(acao.equalsIgnoreCase("salvaUp")){
+                    Integer idProduto = Integer.parseInt(request.getParameter("idProduto"));
+                    String coluna = request.getParameter("col");
+                    String valor = request.getParameter("valor");
+                    Produto p = new Produto();
+                    p.setIdProduto(idProduto);
+                    if(coluna.contains("colNm")){
+                        coluna = "produtoNm";
+                        p.setProdutoNm(valor);
+                    }else if(coluna.contains("colDesc")){
+                        coluna = "produtoDesc";
+                        
+                        p.setProdutoDesc(coluna);
+                    }                      
+                    
+                    try {
+                        prodA.atualizar(p);
+                    } catch (Exception ex) {
+                        Logger.getLogger(GeraDadosServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }else{
+            
+                
+                //carregando os produtos
+                List<Produto> listaProduto;
+                try {
+                    listaProduto = prodA.listaTodos();
+                    JSONObject pai = new JSONObject();
+                    JsonArray filhos = new JsonArray();
+                    JSONObject dados;
+                    for(Produto p:listaProduto){
+                        dados = new JSONObject();
+                        dados.put("idProduto",p.getIdProduto());
+                        dados.put("produtoNm", p.getProdutoNm());
+                        dados.put("produtoDesc", p.getProdutoDesc());
+                        filhos.add(dados);
+                    }
+                    pai.put("data", filhos);
+                    out.print(pai);
+
+                } catch (Exception ex) {
+                    out.print("ERRO no Servlet");
+                }
+            }
             
             
         }
