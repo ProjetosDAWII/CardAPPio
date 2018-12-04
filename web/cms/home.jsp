@@ -18,6 +18,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/principal.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <title>HOME - CMS - Destruction Inteligence 1.0</title>
         
     </head>
@@ -70,6 +71,7 @@
                     <th scope="col">Nome</th>
                     <th scope="col">Descrição</th>
                     <th scope="col">Del</th>
+                    <th scope="col">Fotos</th>
                   </tr>
                 </thead>
                 <tbody id="corpoTabela">
@@ -82,9 +84,35 @@
         
         <!-- fecha  sessão principal do corpo do sistema -->
         
+        
+        
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Fotos do Produto</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body porta-fotos">
+                <iframe class="modal-iframe">
+                    
+                </iframe>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+        
     </body>
     <script src="js/jquery.js"></script>
+    <script src="js/popper.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap-confirmation.min.js"></script>
+    
     <script>
         var idProduto = 0;
         var idColunaEmEdicao = null;
@@ -106,11 +134,13 @@
                    var prev = div.innerHTML;
                    var idNome = 'colNm'+ count;
                    var idDesc = 'colDesc'+count;
+                   var idTrash = 'colTrash'+count;
                    div.innerHTML =prev + "<tr>\n\
                                             <td>"+ valor.idProduto +"</td>\n\
                                             <td id='"+idNome+"' ondblclick=\"editaColuna('"+valor.idProduto+"','"+idNome+"')\">" + valor.produtoNm +"</td>\n\
 \n\                                         <td id='"+idDesc+"' ondblclick=\"editaColuna('"+valor.idProduto+"','"+idDesc+"')\">" + valor.produtoDesc +"</td>\n\
-\n\                                         <td onClick='excluir("+valor.idProduto+")'>x</td>\n\
+\n\                                         <td onClick='excluir("+valor.idProduto+",\""+idTrash+"\")'><i id='"+idTrash+"' data-toggle=\"confirmation\" class='far fa-trash-alt'></i></td>\n\
+\n\                                         <td><i class='far fa-images' data-toggle='modal' data-target='#exampleModal' data-nm='"+valor.produtoNm+"' data-id='"+valor.idProduto+"' ></i></td>\n\
 \n\                                     </tr>";
                    count++;
                });
@@ -139,18 +169,48 @@
                 }    
            });
        }
-       function excluir(id){
-           alert(id);
-           $.ajax({
-               url : "dados",
-               data : {"idProduto":id,"acao":"excluir"}
-           }).done(function(data){
-               if(data>0){
-                   alert("Excluido com sucesso");
-                }else{
-                    alert("Erro ao altera os dados!");
-                }    
-           });
+       function excluir(id,col){
+           //abrindo o balão de confirmação
+           $("#"+col).confirmation({
+               buttons:[
+                   {
+                       class:'btn btn-danger',
+                       label: 'Manda bala'
+                   },
+                   {
+                       class:'btn btn-secondary',
+                       label: 'Não',
+                       cancel:true
+                   }
+               ],
+               title:'Tem certeza?',
+               content:'Não pode ser desfeito',               
+               rootSelector: '[data-toggle=confirmation]',
+               popout:true,
+               singleton:true,
+               onConfirm: function(value){
+                   $.ajax({
+                        url : "dados",
+                        data : {"idProduto":id,"acao":"excluir"}
+                    }).done(function(data){
+                        if(data>0){
+                            alert("Excluido com sucesso");
+                         }else{
+                             alert("Erro ao altera os dados!");
+                         }    
+                    });
+               }
+           }).confirmation('show');
+           
        }
+       $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('nm') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text(modal.find('.modal-title').text() +" - " + recipient)
+        $('.modal-iframe').prop("src","fotos?id="+button.data('id'));
+  })    
     </script>
 </html>

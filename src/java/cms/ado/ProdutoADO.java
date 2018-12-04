@@ -65,7 +65,7 @@ public class ProdutoADO implements DAO {
             conn = ConnectionDAO.getConnection();
             String sql = "DELETE produto WHERE idProduto=?";
             
-            ps.setInt(1, p.getIdProduto());
+            ps.setInt(1,  p.getIdProduto());
             
             return ps.executeUpdate();
 

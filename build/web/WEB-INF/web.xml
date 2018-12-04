@@ -12,6 +12,10 @@
         <servlet-name>GeraDadosServlet</servlet-name>
         <servlet-class>cms.controller.GeraDadosServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FotosServlet</servlet-name>
+        <servlet-class>cms.controller.FotosServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PrincipalServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -24,13 +28,16 @@
         <servlet-name>GeraDadosServlet</servlet-name>
         <url-pattern>/cms/dados</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FotosServlet</servlet-name>
+        <url-pattern>/cms/fotos</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>cms/index.jsp</welcome-file>
         <welcome-file>home</welcome-file>
     </welcome-file-list>
 </web-app>
